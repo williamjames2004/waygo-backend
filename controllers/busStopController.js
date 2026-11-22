@@ -1,7 +1,7 @@
 const BusStop = require("../models/BusStop");
 const BusStand = require("../models/BusStand");
 const District = require("../models/District");
-const generateId = require("../utils/generateID");
+const generateId = require("../utils/generateId");
 
 const createBusStop = async (req, res) => {
   try {

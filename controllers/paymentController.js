@@ -1,6 +1,6 @@
 const Payment = require("../models/Payment");
 const Reservation = require("../models/Reservation");
-const generateId = require("../utils/generateID");
+const generateId = require("../utils/generateId");
 
 const createPayment = async (req, res) => {
   try {

@@ -1,7 +1,7 @@
 const DemandReservation = require("../models/DemandReservation");
 const Passenger = require("../models/Passenger");
 const DemandedTrip = require("../models/DemandTrip");
-const generateId = require("../utils/generateID");
+const generateId = require("../utils/generateId");
 
 const createDemandReservation = async (req, res) => {
   try {

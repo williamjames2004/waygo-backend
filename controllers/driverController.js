@@ -1,7 +1,7 @@
 const bcrypt = require("bcrypt");
 const Driver = require("../models/Driver");
 const Bus = require("../models/Bus");
-const generateId = require("../utils/generateID");
+const generateId = require("../utils/generateId");
 
 const createDriver = async (req, res) => {
   try {

@@ -1,5 +1,5 @@
 const District = require("../models/District");
-const generateId = require("../utils/generateID");
+const generateId = require("../utils/generateId");
 
 const createDistrict = async (req, res) => {
   try {

@@ -1,6 +1,6 @@
 const bcrypt = require("bcrypt");
 const Bus = require("../models/Bus");
-const generateId = require("../utils/generateID");
+const generateId = require("../utils/generateId");
 
 const createBus = async (req, res) => {
   try {

@@ -2,7 +2,7 @@ const Reservation = require("../models/Reservation");
 const Passenger = require("../models/Passenger");
 const Route = require("../models/Route");
 const Bus = require("../models/Bus");
-const generateId = require("../utils/generateID");
+const generateId = require("../utils/generateId");
 
 const createReservation = async (req, res) => {
   try {

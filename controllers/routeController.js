@@ -3,7 +3,7 @@ const Bus = require("../models/Bus");
 const BusStand = require("../models/BusStand");
 const BusStop = require("../models/BusStop");
 const Reservation = require("../models/Reservation");
-const generateId = require("../utils/generateID");
+const generateId = require("../utils/generateId");
 
 const createRoute = async (req, res) => {
   try {
