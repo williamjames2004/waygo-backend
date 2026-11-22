@@ -5,6 +5,7 @@ const {
   createBusStand,
   getBusStands,
   getBusStandById,
+  getBusStandByDistrictID,
   updateBusStand,
   deleteBusStand
 } = require("../controllers/busStandController");
@@ -12,6 +13,7 @@ const {
 router.post("/", createBusStand);
 router.get("/", getBusStands);
 router.get("/:busstandId", getBusStandById);
+router.get("/district/:districtId", getBusStandByDistrictID);
 router.put("/:busstandId", updateBusStand);
 router.delete("/:busstandId", deleteBusStand);
 

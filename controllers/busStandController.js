@@ -109,6 +109,30 @@ const getBusStandById = async (req, res) => {
   }
 };
 
+const getBusStandByDistrictID = async (req, res) => {
+  try {
+    const { districtId } = req.params;
+
+    const busStands = await BusStand.find({
+      districtId,
+      status: "active"
+    }).sort({
+      busstandName: 1
+    });
+
+    res.json({
+      success: true,
+      count: busStands.length,
+      busStands
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message
+    });
+  }
+};
+
 const updateBusStand = async (req, res) => {
   try {
     const busStand = await BusStand.findOneAndUpdate(
@@ -173,6 +197,7 @@ module.exports = {
   createBusStand,
   getBusStands,
   getBusStandById,
+  getBusStandByDistrictID,
   updateBusStand,
   deleteBusStand
 };

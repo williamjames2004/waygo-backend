@@ -128,6 +128,30 @@ const getBusStopById = async (req, res) => {
   }
 };
 
+const getBusStopByBusStandId = async (req, res) => {
+  try {
+    const { busstandId } = req.params;
+
+    const busStops = await BusStop.find({
+      busstandId,
+      status: "active"
+    }).sort({
+      busstopName: 1
+    });
+
+    res.json({
+      success: true,
+      count: busStops.length,
+      busStops
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message
+    });
+  }
+};
+
 const updateBusStop = async (req, res) => {
   try {
     const busStop = await BusStop.findOneAndUpdate(
@@ -193,6 +217,7 @@ module.exports = {
   createBusStop,
   getBusStops,
   getBusStopById,
+  getBusStopByBusStandId,
   updateBusStop,
   deleteBusStop
 };
