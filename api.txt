@@ -1,0 +1,83 @@
+# Districts
+POST   http://localhost:5000/api/districts
+GET    http://localhost:5000/api/districts
+GET    http://localhost:5000/api/districts/DIST0001
+PUT    http://localhost:5000/api/districts/DIST0001
+DELETE http://localhost:5000/api/districts/DIST0001
+
+# Bus Stands
+POST   http://localhost:5000/api/busstands
+GET    http://localhost:5000/api/busstands
+GET    http://localhost:5000/api/busstands/STAND0001
+PUT    http://localhost:5000/api/busstands/STAND0001
+DELETE http://localhost:5000/api/busstands/STAND0001
+
+# Bus Stops
+POST   http://localhost:5000/api/busstops
+GET    http://localhost:5000/api/   
+GET    http://localhost:5000/api/busstops/STOP0001
+PUT    http://localhost:5000/api/busstops/STOP0001
+DELETE http://localhost:5000/api/busstops/STOP0001
+
+# Buses
+POST   http://localhost:5000/api/buses
+GET    http://localhost:5000/api/buses
+GET    http://localhost:5000/api/buses/BUS001
+PUT    http://localhost:5000/api/buses/BUS001
+DELETE http://localhost:5000/api/buses/BUS001
+POST   http://localhost:5000/api/buses/login
+
+# Drivers
+POST   http://localhost:5000/api/drivers
+GET    http://localhost:5000/api/drivers
+GET    http://localhost:5000/api/drivers/DR1000
+PUT    http://localhost:5000/api/drivers/DR1000
+DELETE http://localhost:5000/api/drivers/DR1000
+POST   http://localhost:5000/api/drivers/login
+
+# Passengers
+POST   http://localhost:5000/api/passengers/register
+POST   http://localhost:5000/api/passengers/login
+GET    http://localhost:5000/api/passengers
+GET    http://localhost:5000/api/passengers/234567890123
+PUT    http://localhost:5000/api/passengers/234567890123
+DELETE http://localhost:5000/api/passengers/234567890123
+
+# Routes / Trips
+POST   http://localhost:5000/api/routes
+GET    http://localhost:5000/api/routes
+GET    http://localhost:5000/api/routes/RT100000
+PUT    http://localhost:5000/api/routes/RT100000
+DELETE http://localhost:5000/api/routes/RT100000
+GET    http://localhost:5000/api/routes/search
+GET    http://localhost:5000/api/routes/RT100000/stops
+GET    http://localhost:5000/api/routes/RT100000/seats
+
+# Reservations
+POST   http://localhost:5000/api/reservations
+GET    http://localhost:5000/api/reservations
+GET    http://localhost:5000/api/reservations/RES10000001
+PUT    http://localhost:5000/api/reservations/RES10000001
+DELETE http://localhost:5000/api/reservations/RES10000001
+
+# Payments
+POST   http://localhost:5000/api/payments
+GET    http://localhost:5000/api/payments
+GET    http://localhost:5000/api/payments/PAY10000001
+PUT    http://localhost:5000/api/payments/PAY10000001
+
+# Demand Reservations
+POST   http://localhost:5000/api/demand-reservations
+GET    http://localhost:5000/api/demand-reservations
+GET    http://localhost:5000/api/demand-reservations/DMD10000001
+PUT    http://localhost:5000/api/demand-reservations/DMD10000001
+DELETE http://localhost:5000/api/demand-reservations/DMD10000001
+
+# Demanded Trips
+POST   http://localhost:5000/api/demand-trips
+GET    http://localhost:5000/api/demand-trips
+GET    http://localhost:5000/api/demand-trips/DMDTRIP100001
+GET    http://localhost:5000/api/demand-trips/DMDTRIP100001/status
+PUT    http://localhost:5000/api/demand-trips/DMDTRIP100001
+DELETE http://localhost:5000/api/demand-trips/DMDTRIP100001
+POST   http://localhost:5000/api/demand-trips/DMDTRIP100001/assign-bus
