@@ -223,6 +223,28 @@ const getReservations = async (req, res) => {
     });
   }
 };
+const getReservationsByBusId = async (req, res) => {
+  try {
+    const { busId } = req.params;
+
+    const reservations = await Reservation.find({
+      busId
+    }).sort({
+      createdAt: -1
+    });
+
+    res.json({
+      success: true,
+      count: reservations.length,
+      reservations
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message
+    });
+  }
+};
 
 const getReservationById = async (req, res) => {
   try {
@@ -318,5 +340,6 @@ module.exports = {
   getReservations,
   getReservationById,
   getPassengerReservations,
+  getReservationsByBusId,
   cancelReservation
 };
