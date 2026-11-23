@@ -56,6 +56,7 @@ GET    http://localhost:5000/api/routes/RT100000/seats
 # Reservations
 POST   http://localhost:5000/api/reservations
 GET    http://localhost:5000/api/reservations
+GET    http://localhost:5000/api/reservations/bus/BUS0001
 GET    http://localhost:5000/api/reservations/RES10000001
 PUT    http://localhost:5000/api/reservations/RES10000001
 DELETE http://localhost:5000/api/reservations/RES10000001

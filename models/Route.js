@@ -9,6 +9,10 @@ const routeStopSchema = new mongoose.Schema(
     sequence: {
       type: Number,
       required: true
+    },
+    departureDateTime: {
+      type: Date,
+      default: null
     }
   },
   {
