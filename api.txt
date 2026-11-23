@@ -75,10 +75,10 @@ PUT    http://localhost:5000/api/demand-reservations/DMD10000001
 DELETE http://localhost:5000/api/demand-reservations/DMD10000001
 
 # Demanded Trips
-POST   http://localhost:5000/api/demand-trips
-GET    http://localhost:5000/api/demand-trips
-GET    http://localhost:5000/api/demand-trips/DMDTRIP100001
-GET    http://localhost:5000/api/demand-trips/DMDTRIP100001/status
-PUT    http://localhost:5000/api/demand-trips/DMDTRIP100001
-DELETE http://localhost:5000/api/demand-trips/DMDTRIP100001
-POST   http://localhost:5000/api/demand-trips/DMDTRIP100001/assign-bus
+POST   http://localhost:5000/api/demanded-trips
+GET    http://localhost:5000/api/demanded-trips
+GET    http://localhost:5000/api/demanded-trips/DMDTRIP100001
+GET    http://localhost:5000/api/demanded-trips/DMDTRIP100001/status
+PUT    http://localhost:5000/api/demanded-trips/DMDTRIP100001
+DELETE http://localhost:5000/api/demanded-trips/DMDTRIP100001
+POST   http://localhost:5000/api/demanded-trips/DMDTRIP100001/assign-bus
