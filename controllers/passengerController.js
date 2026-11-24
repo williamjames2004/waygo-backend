@@ -116,6 +116,31 @@ const getPassengerByAadhar = async (req, res) => {
   }
 };
 
+const getPassengerById = async (req, res) => {
+  try {
+    const passenger = await Passenger.findOne({
+      passengerId: req.params.passengerId
+    }).select("-passwordHash");
+
+    if (!passenger) {
+      return res.status(404).json({
+        success: false,
+        message: "Passenger not found"
+      });
+    }
+
+    res.json({
+      success: true,
+      passenger
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message
+    });
+  }
+};
+
 
 // Login Passenger
 const loginPassenger = async (req, res) => {
@@ -267,6 +292,7 @@ module.exports = {
   registerPassenger,
   getPassengers,
   getPassengerByAadhar,
+  getPassengerById,
   loginPassenger,
   updatePassenger,
   deletePassenger
