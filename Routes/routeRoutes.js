@@ -4,6 +4,7 @@ const router = express.Router();
 const {
   createRoute,
   getRoutes,
+  getRoutesByBusstands,
   getRouteById,
   updateRoute,
   deleteRoute,
@@ -16,7 +17,7 @@ router.post("/", createRoute);
 router.get("/", getRoutes);
 
 router.get("/search", searchRoutes);
-
+router.get("/busstands/search", getRoutesByBusstands);
 router.get("/:routeId", getRouteById);
 router.get("/:routeId/stops", getRouteStops);
 router.get("/:routeId/seats", getAvailableSeats);

@@ -39,6 +39,7 @@ POST   http://localhost:5000/api/drivers/login
 POST   http://localhost:5000/api/passengers/register
 POST   http://localhost:5000/api/passengers/login
 GET    http://localhost:5000/api/passengers
+GET    http://localhost:5000/api/passengers/id/P0000006
 GET    http://localhost:5000/api/passengers/234567890123
 PUT    http://localhost:5000/api/passengers/234567890123
 DELETE http://localhost:5000/api/passengers/234567890123

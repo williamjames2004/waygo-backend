@@ -167,6 +167,46 @@ const getRoutes = async (req, res) => {
   }
 };
 
+
+const getRoutesByBusstands = async (req, res) => {
+  try {
+    const {
+      startingBusstandId,
+      endingBusstandId
+    } = req.query;
+
+    // Validate required parameters
+    if (!startingBusstandId || !endingBusstandId) {
+      return res.status(400).json({
+        success: false,
+        message: "Starting and ending bus stand IDs are required"
+      });
+    }
+
+    // Find all matching routes
+    const routes = await Route.find({
+      startingBusstandId,
+      endingBusstandId
+    }).sort({
+      travelDate: 1,
+      departureTime: 1
+    });
+
+    res.json({
+      success: true,
+      count: routes.length,
+      routes
+    });
+
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message
+    });
+  }
+};
+
+
 const getRouteById = async (req, res) => {
   try {
     const route = await Route.findOne({
@@ -441,6 +481,7 @@ const deleteRoute = async (req, res) => {
 module.exports = {
   createRoute,
   getRoutes,
+  getRoutesByBusstands,
   getRouteById,
   updateRoute,
   deleteRoute,
