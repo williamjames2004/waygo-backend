@@ -4,6 +4,7 @@ const Route = require("../models/Route");
 const Bus = require("../models/Bus");
 const generateId = require("../utils/generateId");
 
+
 const createReservation = async (req, res) => {
   try {
     const {
@@ -18,28 +19,32 @@ const createReservation = async (req, res) => {
       amount
     } = req.body;
 
+    // Required field validation
     if (
       !passengerId ||
       !busId ||
       !routeId ||
       !startingBusstandId ||
       !endingBusstandId ||
-      !startingBusstopId ||
-      !endingBusstopId ||
-      !seatNumbers ||
       !Array.isArray(seatNumbers) ||
       seatNumbers.length === 0 ||
       amount === undefined
     ) {
       return res.status(400).json({
         success: false,
-        message: "All reservation details are required"
+        message: "All required reservation details are required"
       });
     }
 
-    const passenger = await Passenger.findOne({
-      passengerId
-    });
+    // Both stop IDs must be provided together
+    if (Boolean(startingBusstopId) !== Boolean(endingBusstopId)) {
+      return res.status(400).json({
+        success: false,
+        message: "Both bus stop IDs must be provided together"
+      });
+    }
+
+    const passenger = await Passenger.findOne({ passengerId });
 
     if (!passenger) {
       return res.status(404).json({
@@ -57,10 +62,7 @@ const createReservation = async (req, res) => {
       });
     }
 
-    const route = await Route.findOne({
-      routeId,
-      busId
-    });
+    const route = await Route.findOne({ routeId, busId });
 
     if (!route) {
       return res.status(404).json({
@@ -69,26 +71,32 @@ const createReservation = async (req, res) => {
       });
     }
 
-    const startStop = route.stops.find(
-      stop => stop.busstopId === startingBusstopId
-    );
+    // Validate bus stops only when provided
+    let startStop = null;
+    let endStop = null;
 
-    const endStop = route.stops.find(
-      stop => stop.busstopId === endingBusstopId
-    );
+    if (startingBusstopId && endingBusstopId) {
+      startStop = route.stops.find(
+        stop => stop.busstopId === startingBusstopId
+      );
 
-    if (!startStop || !endStop) {
-      return res.status(400).json({
-        success: false,
-        message: "Selected bus stops are not part of this route"
-      });
-    }
+      endStop = route.stops.find(
+        stop => stop.busstopId === endingBusstopId
+      );
 
-    if (startStop.sequence >= endStop.sequence) {
-      return res.status(400).json({
-        success: false,
-        message: "Starting stop must come before ending stop"
-      });
+      if (!startStop || !endStop) {
+        return res.status(400).json({
+          success: false,
+          message: "Selected bus stops are not part of this route"
+        });
+      }
+
+      if (startStop.sequence >= endStop.sequence) {
+        return res.status(400).json({
+          success: false,
+          message: "Starting stop must come before ending stop"
+        });
+      }
     }
 
     const uniqueSeats = [...new Set(seatNumbers)];
@@ -121,6 +129,16 @@ const createReservation = async (req, res) => {
           continue;
         }
 
+        // Compare only when both journeys have stop IDs
+        if (
+          !startingBusstopId ||
+          !endingBusstopId ||
+          !seat.startingBusstopId ||
+          !seat.endingBusstopId
+        ) {
+          continue;
+        }
+
         const bookedStart = route.stops.find(
           stop => stop.busstopId === seat.startingBusstopId
         );
@@ -147,17 +165,15 @@ const createReservation = async (req, res) => {
       return res.status(409).json({
         success: false,
         message: "Some selected seats are already booked",
-        unavailableSeats: [
-          ...new Set(unavailableSeats)
-        ]
+        unavailableSeats: [...new Set(unavailableSeats)]
       });
     }
 
     const seats = uniqueSeats.map(seatNo => ({
       seatNo,
       passengerId,
-      startingBusstopId,
-      endingBusstopId
+      startingBusstopId: startingBusstopId || null,
+      endingBusstopId: endingBusstopId || null
     }));
 
     const reservationId = await generateId(
@@ -173,8 +189,8 @@ const createReservation = async (req, res) => {
       routeId,
       startingBusstandId,
       endingBusstandId,
-      startingBusstopId,
-      endingBusstopId,
+      startingBusstopId: startingBusstopId || null,
+      endingBusstopId: endingBusstopId || null,
       seats,
       totalSeats: seats.length,
       amount,
@@ -187,6 +203,7 @@ const createReservation = async (req, res) => {
       message: "Reservation created. Complete payment to confirm booking.",
       reservation
     });
+
   } catch (error) {
     res.status(500).json({
       success: false,
@@ -194,6 +211,7 @@ const createReservation = async (req, res) => {
     });
   }
 };
+
 
 const getReservations = async (req, res) => {
   try {
